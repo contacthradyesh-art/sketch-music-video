@@ -1,45 +1,41 @@
 # Sketch Music Video
 
-A Claude Code skill and rendering scaffold for original pencil-sketch lyric videos.
+A reusable Claude Code skill and project specification for creating original pencil-sketch lyric videos from user-provided audio and exact lyrics.
 
-## What it aims to create
-- 1920x1080 landscape lyric videos
-- Code-drawn pencil illustrations that reveal stroke by stroke
-- User-supplied Hindi or Hinglish lyrics, lettered in sync with validated word timings
-- Optional 720p compressed copy and 9:16 comparison layout
+## Repository status
 
-## Use in Claude Code
-1. Connect this GitHub repository to Claude Code.
-2. Start a Cloud session with this repository.
-3. Open the skill from `.claude/skills/sketch-music-video/SKILL.md`. If skills are enabled, invoke `/sketch-music-video`.
-4. Attach an audio file you are authorized to use.
-5. Paste the exact lyrics, one sung line per row, with a blank line between verses.
-6. Review and approve the storyboard, then the contact sheet, before rendering.
+The skill and setup instructions are committed. The renderer is **not yet verified as a production-ready end-to-end MP3-to-MP4 system**. Run the first-time Cloud setup below to implement and test the actual pipeline in a suitable Claude Code Cloud runtime.
 
-## Important: Cloud limitations
-A GitHub repository stores the source code; it does not itself provide an always-on video-rendering server. Each Claude Cloud session must be checked for Python, Node.js, FFmpeg, Chrome/Chromium, writable disk, memory, execution time, and model availability. A session may not support heavy audio separation or full-resolution rendering. The skill instructs Claude to inspect and report those limits rather than claim success without an actual output.
+## Start in Claude Code Cloud
 
-## Repository layout
-- `.claude/skills/sketch-music-video/SKILL.md` — Claude Code skill
-- `renderer/` — minimal canvas-based frame renderer scaffold
-- `scripts/` — environment and output validation helpers
-- `.github/workflows/validate.yml` — lightweight source validation
+1. Open [Claude Code](https://claude.ai/code) and connect this GitHub repository: `contacthradyesh-art/sketch-music-video`.
+2. Start a Cloud session for the repository.
+3. Paste the complete first-time setup prompt from [CLOUD_SETUP.md](CLOUD_SETUP.md).
+4. Ask Claude to implement the full renderer, run tests, and commit the working code.
+5. Confirm the end-to-end sample test passes before using it for real songs.
 
-## Local prerequisites
-- Python 3.10+
-- Node.js 20+
-- FFmpeg with ffprobe
-- Chrome or Chromium for headless rendering
-- Optional: Demucs and a compatible forced-alignment model; these can be large and compute-intensive.
+## Create each new video
 
-## Install scaffold
-```bash
-npm install
-python -m pip install -r requirements.txt
-npm run check
-```
+After the renderer is implemented:
+1. Start a Cloud session with this repository.
+2. Invoke `/sketch-music-video`. If slash-command discovery is unavailable, ask Claude to read `.claude/skills/sketch-music-video/SKILL.md`.
+3. Attach an audio file you are authorized to use.
+4. Paste exact lyrics, one sung line per row, with a blank line between verses.
+5. Review timing and the original storyboard.
+6. Approve the contact sheet and explicitly reply `GO` before final rendering.
+7. Download verified output files before the Cloud session expires.
 
-This initial repository is a scaffold, not a completed production renderer. Audio separation, forced alignment, full animation orchestration, and end-to-end export still require implementation and testing in a suitable runtime.
+## Intended visual output
+- Warm off-white sketchbook paper and graphite pencil illustrations
+- Drawings that reveal progressively, stroke by stroke
+- Handwritten lyric reveal synchronized to supplied/validated timings
+- 1920x1080 landscape and 1080x1920 vertical outputs
+- Optional compressed 720p copy and short highlight
 
-## Rights
-Use only audio, lyrics, and reference footage you own or are authorized to use. Credit does not replace permission. Do not commit media or model weights to the repository.
+## Cloud limitations
+
+GitHub stores source code; it is not an always-on video-rendering server. Cloud sessions can be temporary and resource-limited. The runtime must be checked for Python, Node.js, FFmpeg/ffprobe, Chromium, writable disk, memory, model access and execution limits. Heavy voice separation and automatic Hindi/Hinglish forced alignment may be unavailable or impractical in a constrained session. The skill requires transparent reporting and an approved manual timing path when automatic alignment is not reliable.
+
+## Rights and privacy
+
+Use only audio, lyrics, and reference footage you own or are authorized to use. Credit does not replace permission. Original artwork must not copy distinctive frames or drawings from a reference music video. Never commit user media, lyrics, renders, model weights, tokens, or secrets to Git.
