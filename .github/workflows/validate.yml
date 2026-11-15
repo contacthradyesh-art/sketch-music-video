@@ -1,0 +1,25 @@
+name: Validate scaffold
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Check renderer syntax
+        run: node --check renderer/render.mjs
+      - name: Check environment script syntax
+        run: python -m py_compile scripts/check_environment.py
+      - name: Render demo SVG
+        run: node renderer/render.mjs --demo
+      - name: Verify demo frame exists
+        run: test -s work/demo/storyboard/frame-0001.svg
