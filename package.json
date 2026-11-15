@@ -1,0 +1,14 @@
+{
+  "name": "sketch-music-video",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Pencil-sketch lyric video renderer scaffold",
+  "type": "module",
+  "scripts": {
+    "check": "node --check renderer/render.mjs && python scripts/check_environment.py",
+    "render:demo": "node renderer/render.mjs --demo"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
